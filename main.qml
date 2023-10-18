@@ -6,11 +6,11 @@ Window {
     width: 640
     height: 480
     visible: true
-    title: qsTr("Hello World")
+    title: qsTr("音频播放")
 
     MediaPlayer {
         id: player
-        source: "file:///Users/yanhuajian/WorkSpace/测试数据/音频/music.mp3"
+        source: "qrc:/assets/music.mp3"
         autoPlay: false
         onDurationChanged: {
             mediaPlayer.duration = duration
@@ -30,7 +30,7 @@ Window {
         visible: true
         enabled: true
         height: 52
-        displayName: "hello"
+        displayName: "大笑音频"
         duration: 300
         position: 5
         focus: true

@@ -35,7 +35,7 @@ Item {
                 radius: 4
                 color: "transparent"
                 Image {
-                    source: "file:///Users/yanhuajian/WorkSpace/测试数据/图片/1.jpg"
+                    source: "qrc:/assets/thumbnail.jpg"
                     fillMode: Image.PreserveAspectCrop
                     anchors.fill: parent
 
@@ -50,7 +50,7 @@ Item {
                             height: 16
                             width: 16
                             anchors.centerIn: parent
-                            source: parent.playing ? "file:///Users/yanhuajian/Downloads/google/pause.png": "file:///Users/yanhuajian/Downloads/google/play.png"
+                            source: parent.playing ? "qrc:/assets/pause.png" : "qrc:/assets/play.png"
                         }
                         MouseArea {
                             anchors.fill: parent
@@ -173,7 +173,7 @@ Item {
                 Image {
                     width: 16
                     height: 16
-                    source: "file:///Users/yanhuajian/Downloads/google/close.png"
+                    source: "qrc:/assets/close.png"
                     anchors.centerIn: parent
                 }
 

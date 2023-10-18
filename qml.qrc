@@ -2,5 +2,10 @@
     <qresource prefix="/">
         <file>main.qml</file>
         <file>MMediaPlayer.qml</file>
+        <file>assets/close.png</file>
+        <file>assets/pause.png</file>
+        <file>assets/play.png</file>
+        <file>assets/thumbnail.jpg</file>
+        <file>assets/music.mp3</file>
     </qresource>
 </RCC>
