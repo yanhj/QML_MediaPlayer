@@ -1,6 +1,9 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtMultimedia 5.12
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.3
+
 
 Window {
     width: 640
@@ -19,6 +22,9 @@ Window {
         onPositionChanged: {
             mediaPlayer.position = position
             console.log("position", position)
+            if(position >= duration) {
+                mediaPlayer.playing = false
+            }
         }
     }
 
@@ -29,7 +35,7 @@ Window {
         width: parent.width - 20
         visible: true
         enabled: true
-        height: 52
+        height: 60
         displayName: "大笑音频"
         duration: 300
         position: 5
@@ -44,6 +50,9 @@ Window {
             visible = false
             player.stop()
         }
+        onSigPositionChanged: {
+           player.seek(ms)
+        }
     }
     Timer {
         interval: 1000
@@ -53,6 +62,60 @@ Window {
 
             player.play()
         }
+    }
+
+    Rectangle {
+        y: 200
+        x: 100
+        height: 100
+        width: 300
+        border.color: "black"
+        anchors.centerIn: parent
+        RowLayout {
+            anchors.margins: 8
+            anchors.fill: parent
+            spacing: 8
+            Rectangle {
+                width: 80
+                color: "red"
+                Layout.fillHeight: true
+
+            }
+            Rectangle {
+                width: 80
+                color: "green"
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                ColumnLayout {
+                    anchors.margins: 4
+                    spacing: 4
+                    anchors.fill: parent
+                    Rectangle {
+                        height: parent.width / 2
+                        Layout.fillWidth: true
+                        color:"red"
+                    }
+                    Rectangle {
+                        height: parent.width / 2
+                        Layout.fillWidth: true
+                        color:"blue"
+                    }
+                }
+            }
+            Rectangle {
+                width: 80
+                color: "blue"
+                Layout.fillHeight: true
+            }
+        }
+    }
+
+    MusicItem {
+        x: 100
+        y: 300
+        width: parent.width - 150;
+        height: 100
+
     }
 
     /*
