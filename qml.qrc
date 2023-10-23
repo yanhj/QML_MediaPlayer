@@ -7,5 +7,6 @@
         <file>assets/play.png</file>
         <file>assets/thumbnail.jpg</file>
         <file>assets/music.mp3</file>
+        <file>MusicItem.qml</file>
     </qresource>
 </RCC>

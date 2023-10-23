@@ -13,27 +13,24 @@ Item {
     signal sigPlay()
     signal sigPause()
     signal sigStop()
+    signal sigPositionChanged(int ms)
 
     id: root
-    height: 60
-    width: 480
     Rectangle {
         id: background
         anchors.fill: parent
         anchors.centerIn: parent
-        anchors.margins: 0
+        border.color: "red"
         color: "#29292d"
-
         RowLayout {
             anchors.fill: parent
             spacing: 8
+            Layout.margins: 8
             Rectangle {
                 id: thumbnialArea
                 width: 48
                 height: 48
-                anchors.margins: 0
                 radius: 4
-                color: "transparent"
                 Image {
                     source: "qrc:/assets/thumbnail.jpg"
                     fillMode: Image.PreserveAspectCrop
@@ -50,7 +47,7 @@ Item {
                             height: 16
                             width: 16
                             anchors.centerIn: parent
-                            source: parent.playing ? "qrc:/assets/pause.png" : "qrc:/assets/play.png"
+                            source: playing ? "qrc:/assets/pause.png" : "qrc:/assets/play.png"
                         }
                         MouseArea {
                             anchors.fill: parent
@@ -127,6 +124,7 @@ Item {
                             }
                             Slider {
                                 id: control
+                                enabled: duration > 0
                                 Layout.fillWidth: true
                                 to: duration
                                 padding: 0
@@ -152,12 +150,17 @@ Item {
                                 handle: Rectangle {
                                       x: control.leftPadding + control.visualPosition * (control.availableWidth - width)
                                       y: control.topPadding + control.availableHeight / 2 - height / 2
-                                      implicitWidth: 20
-                                      implicitHeight: 20
-                                      radius: 10
+                                      implicitWidth: 16
+                                      implicitHeight: 16
+                                      radius: 8
                                       color: control.pressed ? "#f0f0f0" : "#FFFFFF"
                                       border.color: "#bdbebf"
                                   }
+                                onMoved: {
+                                    console.log("position Changed: ", value)
+                                    sigPositionChanged(value)
+                                }
+
                             }
 
                         }
