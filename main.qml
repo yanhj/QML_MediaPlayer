@@ -4,7 +4,6 @@ import QtMultimedia 5.12
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.3
 
-
 Window {
     width: 640
     height: 480
@@ -114,7 +113,10 @@ Window {
         x: 100
         y: 300
         width: parent.width - 150;
-        height: 100
+        height: 80
+        displayName: "大笑音频--哈哈哈哈😆"
+        duration: 300
+        position: 5
 
     }
 
@@ -148,4 +150,11 @@ Window {
         }
     }
     */
+
+    AudioMaterialListView {
+        x: 100
+        y: 400
+        width: parent.width - 150;
+        height: 80
+    }
 }

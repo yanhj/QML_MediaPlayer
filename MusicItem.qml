@@ -26,7 +26,7 @@ Item {
             anchors.fill: parent
             spacing: 8
             Rectangle {
-                width: 80
+                width: 48
                 color: "red"
                 Layout.fillHeight: true
                 Image {
@@ -81,10 +81,13 @@ Item {
                     spacing: 4
                     anchors.fill: parent
                     Rectangle {
-                        height: 30
+                        height: 24
                         Layout.fillWidth: true
                         color:"red"
                         Text {
+                            anchors.fill: parent
+                            verticalAlignment: Text.AlignVCenter
+                            horizontalAlignment: Text.AlignLeft
                             id: mediaName
                             text: displayName
                             color: "#ffffff"
@@ -102,11 +105,11 @@ Item {
 
                             Rectangle {
                                 Layout.fillHeight: true
-                                width: 75
+                                width: 60
                                 color: "red"
                                 Text {
                                     height: parent.height
-                                    width: 75
+                                    anchors.fill: parent
                                     text: timeToString(position)
                                     font.pixelSize: 12
                                     color: "#1fc1cc"
@@ -115,17 +118,18 @@ Item {
                                 }
                             }
                             Rectangle {
-                                Layout.fillHeight: true
+                                height: 20
+                                anchors.verticalCenter: parent.Center
                                 width: 1
                                 color: "black"
                             }
                             Rectangle {
                                 Layout.fillHeight: true
-                                width: 75
+                                width: 60
                                 color: "yellow"
                                 Text {
                                     height: parent.height
-                                    width: 75
+                                    anchors.fill: parent
                                     text: timeToString(position)
                                     font.pixelSize: 12
                                     color: "#1fc1cc"
@@ -134,51 +138,49 @@ Item {
                                 }
                             }
                             Rectangle {
-                            Layout.fillHeight: true
-                             Layout.fillWidth: true
-                             color: "green"
+                                Layout.fillHeight: true
+                                Layout.fillWidth: true
+                                color: "green"
 
-                             Slider {
-                                 id: control
-                                 anchors.fill: parent
-                                 enabled: duration > 0
-                                 Layout.fillWidth: true
-                                 to: duration
-                                 padding: 0
-                                 stepSize: 1
-                                 from: 0
-                                 background: Rectangle {
-                                     x: control.leftPadding
-                                     y: control.topPadding + control.availableHeight / 2 - height / 2
-                                     implicitWidth: 200
-                                     implicitHeight: 4
-                                     width: control.availableWidth
-                                     height: implicitHeight
-                                     radius: 2
-                                     color: "#47474B"
+                                Slider {
+                                    id: control
+                                    anchors.fill: parent
+                                    enabled: duration > 0
+                                    Layout.fillWidth: true
+                                    to: duration
+                                    padding: 0
+                                    stepSize: 1
+                                    from: 0
+                                    background: Rectangle {
+                                        x: control.leftPadding
+                                        y: control.topPadding + control.availableHeight / 2 - height / 2
+                                        implicitWidth: 200
+                                        implicitHeight: 4
+                                        width: control.availableWidth
+                                        height: implicitHeight
+                                        radius: 2
+                                        color: "#47474B"
 
-                                     Rectangle {
-                                         width: control.visualPosition * parent.width
-                                         height: parent.height
-                                         color: "#1fc1cc"
-                                         radius: 2
-                                     }
-                                 }
-                                 handle: Rectangle {
-                                       x: control.leftPadding + control.visualPosition * (control.availableWidth - width)
-                                       y: control.topPadding + control.availableHeight / 2 - height / 2
-                                       implicitWidth: 16
-                                       implicitHeight: 16
-                                       radius: 8
-                                       color: control.pressed ? "#f0f0f0" : "#FFFFFF"
-                                       border.color: "#bdbebf"
-                                   }
-                                 onMoved: {
-                                     console.log("position Changed: ", value)
-                                     sigPositionChanged(value)
-                                 }
-
-                             }
+                                        Rectangle {
+                                            width: control.visualPosition * parent.width
+                                            height: parent.height
+                                            color: "#1fc1cc"
+                                            radius: 2
+                                        }
+                                    }
+                                    handle: Rectangle {
+                                        x: control.leftPadding + control.visualPosition * (control.availableWidth - width)
+                                        y: control.topPadding + control.availableHeight / 2 - height / 2
+                                        implicitWidth: 16
+                                        implicitHeight: 16
+                                        radius: 8
+                                        color: control.pressed ? "#f0f0f0" : "#FFFFFF"
+                                        border.color: "#bdbebf"
+                                    }
+                                    onMoved: {
+                                        sigPositionChanged(value)
+                                    }
+                                }
                             }
                         }
                     }
@@ -220,15 +222,15 @@ Item {
         console.log(msTime, seconds, minutes)
         var hours = Math.floor(msTime / 3600 % 24);
         var formatedTime = ""
-         if(minutes < 10) {
-             formatedTime += "0"
-         }
-         formatedTime += minutes
-         formatedTime += ":"
-         if(seconds < 10) {
-             formatedTime += "0"
-         }
-         formatedTime += seconds
-         return formatedTime;
-     }
+        if(minutes < 10) {
+            formatedTime += "0"
+        }
+        formatedTime += minutes
+        formatedTime += ":"
+        if(seconds < 10) {
+            formatedTime += "0"
+        }
+        formatedTime += seconds
+        return formatedTime;
+    }
 }

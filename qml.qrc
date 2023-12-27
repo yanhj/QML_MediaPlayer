@@ -8,5 +8,6 @@
         <file>assets/thumbnail.jpg</file>
         <file>assets/music.mp3</file>
         <file>MusicItem.qml</file>
+        <file>AudioMaterialListView.qml</file>
     </qresource>
 </RCC>
