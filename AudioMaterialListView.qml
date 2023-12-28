@@ -5,7 +5,8 @@ import QtMultimedia 5.15
 
 Rectangle {
     id: root
-
+    width: 800
+    height: 600
     //到达底部时，发送继续加载信号
     signal qmlContinueLoad()
     //点击下载按钮
@@ -27,9 +28,10 @@ Rectangle {
     function playerMusic(localFile, display, localThumbnail) {
         if (localFile === "")
             return ;
-        player.source = "file:///" + localFile;
+        console.log("localFile: " + localFile)
+        player.source = localFile;
         mediaPlayer.displayName = display;
-        mediaPlayer.thumbnail = localThumbnail;
+        //mediaPlayer.thumbnail = localThumbnail;
         mediaPlayer.visible = true;
         player.play();
         mediaPlayer.playing = true;
@@ -70,9 +72,6 @@ Rectangle {
             }
         }
         onFocusChanged: {
-            if (!hasFocus) {
-                closePlayer()
-            }
         }
     }
 
@@ -150,7 +149,7 @@ Rectangle {
                                 })
                             }
                             if(downloaded && (imgBg.materialJson === null || imgBg.materialJson === "" || imgBg.materialJson === undefined)) {
-                                imgBg.materialJson = appMaterialListModel.constructJson(materialId)
+                                //imgBg.materialJson = appMaterialListModel.constructJson(materialId)
                             }
                             mouse.accepted = false;
                         }
@@ -340,16 +339,6 @@ Rectangle {
             player.seek(ms);
         }
 
-        MouseArea {
-            propagateComposedEvents: true
-            anchors.fill: parent
-            onClicked: {
-                mouse.accepted = false;
-            }
-            onPressed: {
-                mouse.accepted = false;
-            }
-        }
     }
 
 }

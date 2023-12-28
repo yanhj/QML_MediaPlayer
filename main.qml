@@ -26,33 +26,6 @@ Window {
             }
         }
     }
-
-    MMediaPlayer {
-        x: 10
-        y: 100
-        id: mediaPlayer
-        width: parent.width - 20
-        visible: true
-        enabled: true
-        height: 60
-        displayName: "大笑音频"
-        duration: 300
-        position: 5
-        focus: true
-        onSigPlay: {
-            player.play()
-        }
-        onSigPause: {
-            player.pause()
-        }
-        onSigStop: {
-            visible = false
-            player.stop()
-        }
-        onSigPositionChanged: {
-           player.seek(ms)
-        }
-    }
     Timer {
         interval: 1000
         running: false
@@ -62,64 +35,92 @@ Window {
             player.play()
         }
     }
-
-    Rectangle {
-        y: 200
-        x: 100
-        height: 100
-        width: 300
-        border.color: "black"
-        anchors.centerIn: parent
-        RowLayout {
-            anchors.margins: 8
-            anchors.fill: parent
-            spacing: 8
-            Rectangle {
-                width: 80
-                color: "red"
-                Layout.fillHeight: true
-
+    ColumnLayout {
+        anchors.fill: parent
+        spacing: 8
+        anchors.margins: 8
+        MMediaPlayer {
+            id: mediaPlayer
+            Layout.fillWidth: true
+            height: 60
+            visible: true
+            enabled: true
+            displayName: "大笑音频"
+            duration: 300
+            position: 5
+            focus: true
+            onSigPlay: {
+                player.play()
             }
-            Rectangle {
-                width: 80
-                color: "green"
-                Layout.fillHeight: true
-                Layout.fillWidth: true
-                ColumnLayout {
-                    anchors.margins: 4
-                    spacing: 4
-                    anchors.fill: parent
-                    Rectangle {
-                        height: parent.width / 2
-                        Layout.fillWidth: true
-                        color:"red"
-                    }
-                    Rectangle {
-                        height: parent.width / 2
-                        Layout.fillWidth: true
-                        color:"blue"
-                    }
-                }
+            onSigPause: {
+                player.pause()
             }
-            Rectangle {
-                width: 80
-                color: "blue"
-                Layout.fillHeight: true
+            onSigStop: {
+                visible = false
+                player.stop()
+            }
+            onSigPositionChanged: {
+                player.seek(ms)
             }
         }
+
+        Rectangle {
+            height: 100
+            Layout.fillWidth: true
+            border.color: "black"
+            RowLayout {
+                anchors.margins: 8
+                anchors.fill: parent
+                spacing: 8
+                Rectangle {
+                    width: 80
+                    color: "red"
+                    Layout.fillHeight: true
+
+                }
+                Rectangle {
+                    width: 80
+                    color: "green"
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    ColumnLayout {
+                        anchors.margins: 4
+                        spacing: 4
+                        anchors.fill: parent
+                        Rectangle {
+                            height: parent.width / 2
+                            Layout.fillWidth: true
+                            color: "red"
+                        }
+                        Rectangle {
+                            height: parent.width / 2
+                            Layout.fillWidth: true
+                            color: "blue"
+                        }
+                    }
+                }
+                Rectangle {
+                    width: 80
+                    color: "blue"
+                    Layout.fillHeight: true
+                }
+            }
+        }
+
+        MusicItem {
+            id: itemMusic
+            Layout.fillWidth: true
+            height: 100
+            displayName: "大笑音频--哈哈哈哈😆"
+            duration: 300
+            position: 5
+        }
+
+        AudioMaterialListView {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+        }
     }
-
-    MusicItem {
-        x: 100
-        y: 300
-        width: parent.width - 150;
-        height: 80
-        displayName: "大笑音频--哈哈哈哈😆"
-        duration: 300
-        position: 5
-
-    }
-
     /*
     ListView {
         anchors.fill: parent
@@ -151,10 +152,4 @@ Window {
     }
     */
 
-    AudioMaterialListView {
-        x: 100
-        y: 400
-        width: parent.width - 150;
-        height: 80
-    }
 }

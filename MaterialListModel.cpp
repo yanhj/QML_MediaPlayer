@@ -77,19 +77,28 @@ QVariant MaterialListModel::data(const QModelIndex &index, int role) const {
             if(record->thumbnail.startsWith("qrc:")) {
                 return record->thumbnail;
             }
-            if(record->thumbnail.isNull() && !record->thumbnailUrl.isEmpty()) {
+            if(record->thumbnail.isEmpty() && !record->thumbnailUrl.isEmpty()) {
                 return "";
             }
             return "file:///" + record->thumbnail;
         case MaterialListRole::kPreviewUrl:
             return record->previewUrl;
         case MaterialListRole::kFile:
-            return record->file;
+            if(record->file.startsWith("qrc:")) {
+                return record->file;
+            }
+            if(record->file.isEmpty() && !record->fileUrl.isEmpty()) {
+                return "";
+            }
+            return "file:///" + record->file;
         case MaterialListRole::kFileUrl:
             return record->fileUrl;
         case MaterialListRole::kCategory:
             return m_category;
         case MaterialListRole::kDownloaded:
+            if(record->file.startsWith("qrc:")) {
+                return true;
+            }
             return QFile::exists(record->file)
             || (record->fileUrl.isEmpty() && record->file.isEmpty());
     }
